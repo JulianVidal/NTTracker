@@ -1,0 +1,49 @@
+html {
+    background-color: black;
+}
+
+body {
+    font-family: 'Press Start 2P', serif;
+
+}
+
+h1 {
+    color: white;
+    font-size: 26px;
+}
+
+.current, .last{
+     padding-left: 50px;
+     width: inherit;
+}
+
+.title {
+    width: 350px;
+}
+
+.tracker {
+    margin: auto;
+    margin-top: 140px;
+    width: 430px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.input_label {
+    color: white;
+}
+
+#submit {
+    font-family: 'Press Start';
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+
+}
