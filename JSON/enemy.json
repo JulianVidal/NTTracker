@@ -1,0 +1,323 @@
+{
+  "0": {
+    "Enemy name": "Bandit"
+  },
+  "1": {
+    "Enemy name": "Maggot"
+  },
+  "2": {
+    "Enemy name": "Rad Maggot"
+  },
+  "3": {
+    "Enemy name": "Big Maggot"
+  },
+  "4": {
+    "Enemy name": "Scorpion"
+  },
+  "5": {
+    "Enemy name": "Gold Scorpion"
+  },
+  "6": {
+    "Enemy name": "Big Bandit"
+  },
+  "7": {
+    "Enemy name": "Rat"
+  },
+  "8": {
+    "Enemy name": "Rat King"
+  },
+  "9": {
+    "Enemy name": "Green Rat"
+  },
+  "10": {
+    "Enemy name": "Gator"
+  },
+  "11": {
+    "Enemy name": "Exploder"
+  },
+  "12": {
+    "Enemy name": "Toxic Frog"
+  },
+  "13": {
+    "Enemy name": "Mom"
+  },
+  "14": {
+    "Enemy name": "Assassin"
+  },
+  "15": {
+    "Enemy name": "Raven"
+  },
+  "16": {
+    "Enemy name": "Salamander"
+  },
+  "17": {
+    "Enemy name": "Sniper"
+  },
+  "18": {
+    "Enemy name": "Big Dog"
+  },
+  "19": {
+    "Enemy name": "Spider"
+  },
+  "20": {
+    "Enemy name": "(Not in game)"
+  },
+  "21": {
+    "Enemy name": "Laser Crystal"
+  },
+  "22": {
+    "Enemy name": "Hyper Crystal"
+  },
+  "23": {
+    "Enemy name": "Snow Bandit"
+  },
+  "24": {
+    "Enemy name": "Snowbot"
+  },
+  "25": {
+    "Enemy name": "Wolf"
+  },
+  "26": {
+    "Enemy name": "Snowtank"
+  },
+  "27": {
+    "Enemy name": "Lil Hunter"
+  },
+  "28": {
+    "Enemy name": "Freak"
+  },
+  "29": {
+    "Enemy name": "Explo Freak"
+  },
+  "30": {
+    "Enemy name": "Rhino Freak"
+  },
+  "31": {
+    "Enemy name": "Necromancer"
+  },
+  "32": {
+    "Enemy name": "Turret"
+  },
+  "33": {
+    "Enemy name": "Technomancer"
+  },
+  "34": {
+    "Enemy name": "Guardian"
+  },
+  "35": {
+    "Enemy name": "Explo Guardian"
+  },
+  "36": {
+    "Enemy name": "Dog Guardian"
+  },
+  "37": {
+    "Enemy name": "Throne"
+  },
+  "38": {
+    "Enemy name": "Throne II"
+  },
+  "39": {
+    "Enemy name": "Bone Fish"
+  },
+  "40": {
+    "Enemy name": "Crab"
+  },
+  "41": {
+    "Enemy name": "Turtle"
+  },
+  "42": {
+    "Enemy name": "Venus Grunt"
+  },
+  "43": {
+    "Enemy name": "Venus Sarge"
+  },
+  "44": {
+    "Enemy name": "Fireballer"
+  },
+  "45": {
+    "Enemy name": "Super Fireballer"
+  },
+  "46": {
+    "Enemy name": "Jock"
+  },
+  "47": {
+    "Enemy name": "Cursed Spider"
+  },
+  "48": {
+    "Enemy name": "Cursed Crystal"
+  },
+  "49": {
+    "Enemy name": "Mimic"
+  },
+  "50": {
+    "Enemy name": "Health Mimic"
+  },
+  "51": {
+    "Enemy name": "Grunt"
+  },
+  "52": {
+    "Enemy name": "Inspector"
+  },
+  "53": {
+    "Enemy name": "Shielder"
+  },
+  "54": {
+    "Enemy name": "Crown Guardian"
+  },
+  "55": {
+    "Enemy name": "Explosion"
+  },
+  "56": {
+    "Enemy name": "Small Explosion"
+  },
+  "57": {
+    "Enemy name": "Fire Trap"
+  },
+  "58": {
+    "Enemy name": "Shield"
+  },
+  "59": {
+    "Enemy name": "Toxin"
+  },
+  "60": {
+    "Enemy name": "Horror"
+  },
+  "61": {
+    "Enemy name": "Barrel"
+  },
+  "62": {
+    "Enemy name": "Toxic Barrel"
+  },
+  "63": {
+    "Enemy name": "Golden Barrel"
+  },
+  "64": {
+    "Enemy name": "Car"
+  },
+  "65": {
+    "Enemy name": "Venus Car"
+  },
+  "66": {
+    "Enemy name": "Venus Car Fixed"
+  },
+  "67": {
+    "Enemy name": "Venuz Car 2"
+  },
+  "68": {
+    "Enemy name": "Icy Car"
+  },
+  "69": {
+    "Enemy name": "Thrown Car"
+  },
+  "70": {
+    "Enemy name": "Mine"
+  },
+  "71": {
+    "Enemy name": "Crown of Death"
+  },
+  "72": {
+    "Enemy name": "Rogue Strike"
+  },
+  "73": {
+    "Enemy name": "Blood Launcher"
+  },
+  "74": {
+    "Enemy name": "Blood Cannon"
+  },
+  "75": {
+    "Enemy name": "Blood Hammer"
+  },
+  "76": {
+    "Enemy name": "Disc"
+  },
+  "77": {
+    "Enemy name": "Curse Eat"
+  },
+  "78": {
+    "Enemy name": "Big Dog Missile"
+  },
+  "79": {
+    "Enemy name": "Halloween Bandit"
+  },
+  "80": {
+    "Enemy name": "Lil Hunter Fly"
+  },
+  "81": {
+    "Enemy name": "Throne Death"
+  },
+  "82": {
+    "Enemy name": "Jungle Bandit"
+  },
+  "83": {
+    "Enemy name": "Jungle Assassin"
+  },
+  "84": {
+    "Enemy name": "Jungle Fly"
+  },
+  "85": {
+    "Enemy name": "Crown of Hatred"
+  },
+  "86": {
+    "Enemy name": "Ice Flower"
+  },
+  "87": {
+    "Enemy name": "Cursed Ammo Pickup"
+  },
+  "88": {
+    "Enemy name": "Underwater Lightning"
+  },
+  "89": {
+    "Enemy name": "Elite Grunt"
+  },
+  "90": {
+    "Enemy name": "Blood Gamble"
+  },
+  "91": {
+    "Enemy name": "Elite Shielder"
+  },
+  "92": {
+    "Enemy name": "Elite Inspector"
+  },
+  "93": {
+    "Enemy name": "Captain"
+  },
+  "94": {
+    "Enemy name": "Van"
+  },
+  "95": {
+    "Enemy name": "Buff Gator"
+  },
+  "96": {
+    "Enemy name": "Generator"
+  },
+  "97": {
+    "Enemy name": "Lightning Crystal"
+  },
+  "98": {
+    "Enemy name": "Golden Snowtank"
+  },
+  "99": {
+    "Enemy name": "Green Explosion"
+  },
+  "100": {
+    "Enemy name": "Small Generator"
+  },
+  "101": {
+    "Enemy name": "Golden Disc"
+  },
+  "102": {
+    "Enemy name": "Big Dog Explosion"
+  },
+  "103": {
+    "Enemy name": "IDPD Freak"
+  },
+  "104": {
+    "Enemy name": "Throne II Death"
+  },
+  "105": {
+    "Enemy name": "(Not in game)"
+  },
+  "-1": {
+    "Enemy name": "Nothing"
+  }
+}
