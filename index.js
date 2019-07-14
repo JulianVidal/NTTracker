@@ -9,6 +9,26 @@ let death = false;
 let previous_current = Math.round((new Date()).getTime() / 1000);
 let current_time = Math.round((new Date()).getTime() / 1000);
 
+let enemyIDs;
+let characterIDs;
+
+function loadJSON(url, callback) {
+    const obj = new XMLHttpRequest();
+    obj.overrideMimeType("JSON");
+    obj.open('GET', url, true);
+    obj.onreadystatechange = function () {
+        if (obj.readyState === 4 && obj.status == "200") {
+            console.log("FILE has loaded");
+            callback(obj.responseText);
+        }
+    };
+
+    obj.send(null);
+}
+
+loadJSON( 'JSON/enemy.json', data => enemyIDs = JSON.parse(data) );
+loadJSON( 'JSON/character.json', data => characterIDs = JSON.parse(data) );
+
 function redirect() {
     id = document.getElementById('steamID64').value;
     key = document.getElementById('streamKey').value;
@@ -109,6 +129,10 @@ function display_last() {
     const last_level = data.previous.charlvl;
     const last_kills = data.previous.kills;
     const last_type = data.previous.type;
+    const enemyID = data.previous.lasthit;
+    const enemyName = enemyIDs[enemyID]["Enemy name"];
+    const charID = data.previous.char;
+    const charName = characterIDs[charID]["Character"];
 
     const lastTimeElement = document.getElementById("last-time");
     lastTimeElement.textContent = `Time: ${minutes} : ${seconds}`;
@@ -127,6 +151,12 @@ function display_last() {
 
     const lastTypeElement = document.getElementById("last-type");
     lastTypeElement.textContent = `Type: ${last_type}`;
+
+    const lastCharElement = document.getElementById("char");
+    lastCharElement.textContent = `${charName}`;
+
+    const lastEnemyElement = document.getElementById("enemy");
+    lastEnemyElement.textContent = `${enemyName}`;
 }
 
 function display_currentNothing() {
@@ -167,5 +197,11 @@ function display_lastNothing() {
 
     const lastTypeElement = document.getElementById("last-type");
     lastTypeElement.textContent = `Type:`;
+
+    const lastCharElement = document.getElementById("char");
+    lastCharElement.textContent = ``;
+
+    const lastEnemyElement = document.getElementById("enemy");
+    lastEnemyElement.textContent = ``;
 }
 
