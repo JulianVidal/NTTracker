@@ -1,0 +1,54 @@
+html {
+    background-color: black;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Press Start 2P', serif;
+
+}
+
+h1 {
+    color: white;
+    font-size: 14px;
+}
+
+.last{
+     width: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.title {
+    width: inherit;
+    text-align: center;
+}
+
+.tracker {
+    margin: auto;
+    width: 430px;
+    height: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+}
+.name {
+    text-align: center;
+}
+
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 125px;
+}
+
+.image-item {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75px;
+}
+

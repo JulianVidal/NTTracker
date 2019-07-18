@@ -46,6 +46,14 @@ h1 {
     width: 100px;
 }
 
+#submit-lastRun {
+    font-family: 'Press Start';
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+}
+
 .name {
     margin-left: 50px;
 }

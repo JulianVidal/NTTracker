@@ -8,8 +8,8 @@
     <script src="index.js"> </script>
     <script>
        window.onload = () => {
-      //      let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
-     //       bannerNode.parentNode.removeChild(bannerNode);
+            let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+            bannerNode.parentNode.removeChild(bannerNode);
        }
 
     </script>
@@ -26,7 +26,8 @@
     <label for="streamKey" class = "input_label" > Stream Key </label>
     <input id="streamKey" name="streamKey"/>
     <br>
-    <button id="submit" onclick="redirect()"> Track </button>
+    <button id="submit" onclick="redirect('tracker.php')"> Track </button>
+    <button id="submit-lastRun" onclick="redirect('tracker-lastRun.php')"> Track (Last Run)</button>
 </div>
 
 </body>
