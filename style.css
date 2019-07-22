@@ -1,5 +1,7 @@
 html {
     background-color: black;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 body {
@@ -23,7 +25,7 @@ h1 {
 
 .tracker {
     margin: auto;
-    width: 430px;
+    width: 440px;
 }
 
 .form {
@@ -56,4 +58,8 @@ h1 {
 
 .name {
     margin-left: 50px;
+}
+
+label {
+    color: inherit;
 }

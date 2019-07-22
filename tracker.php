@@ -23,7 +23,7 @@
    echo "<script> credentials('$steamID64', '$streamKey');  </script>";
 ?>
 
-<div class="tracker">
+<div class="tracker" id="tracker">
     <h1 class="title" style="margin-top: 50px;">Current Run: </h1>
     <div class="current">
         <h1 id="current-time">Time:</h1>

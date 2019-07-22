@@ -1,20 +1,22 @@
 html {
     background-color: black;
+    color: #FFFFFF;
     overflow-x: hidden;
+    overflow-y: hidden;
+    font-size: 14px;
 }
 
 body {
     font-family: 'Press Start 2P', serif;
-
+    margin: 0;
 }
 
 h1 {
-    color: white;
-    font-size: 14px;
+    font-size: inherit;
 }
 
 .last{
-     width: inherit;
+    width: inherit;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -27,13 +29,14 @@ h1 {
 
 .tracker {
     margin: auto;
-    width: 430px;
-    height: 1400px;
+    width: 440px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-
+    height: auto;
+    margin-left: 5px;
 }
+
 .name {
     text-align: center;
 }
@@ -42,7 +45,7 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 125px;
+    width: 100px;
 }
 
 .image-item {
@@ -52,3 +55,6 @@ h1 {
     width: 75px;
 }
 
+.current {
+    visibility: hidden;
+}

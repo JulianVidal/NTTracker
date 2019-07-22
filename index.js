@@ -9,30 +9,24 @@ let death = false;
 let previous_current = Math.round((new Date()).getTime() / 1000);
 let current_time = Math.round((new Date()).getTime() / 1000);
 
-let last = false;
+let last = true;
 
-getJSON();
+let darkMode = false;
 
-function loadJSON(url, callback) {
-    const obj = new XMLHttpRequest();
-    obj.overrideMimeType("JSON");
-    obj.open('GET', url, true);
-    obj.onreadystatechange = function () {
-        if (obj.readyState === 4 && obj.status == "200") {
-            console.log("FILE has loaded");
-            callback(obj.responseText);
-        }
-    };
+let best_loop;
+let best_world;
+let best_level;
 
-    obj.send(null);
-}
+
+setup();
+
 let enemyIDs;
 let characterIDs;
 let crownIDs;
 let weaponIDs;
 let mutationIDs;
 
-async function getJSON() {
+async function setup() {
     let response;
 
     response = await fetch( 'JSON/enemy.json');
@@ -49,13 +43,32 @@ async function getJSON() {
 
     response = await fetch( 'JSON/mutation.json');
     mutationIDs = await response.json();
+
+    const doc = document.getElementsByTagName('html')[0];
+
+    if (darkMode) {
+
+        doc.style.color = '#FFFFFF';
+        doc.style.backgroundColor = '#000000';
+
+    } else {
+
+        doc.style.color = '#000000';
+        doc.style.backgroundColor = '#FFFFFF';
+
+    }
+
+    document.getElementById('tracker').width = window.innerWidth;
 }
 
 function redirect(file) {
+    if (document.getElementById('darkMode').checked) {
+        darkMode = false;
+    }
     id = document.getElementById('steamID64').value;
     key = document.getElementById('streamKey').value;
 
-    window.location  = `${file}?steamID64=${id}&streamKey=${key}`;
+    window.location  = `${file}?steamID64=${id}&streamKey=${key}&darkMode=${darkMode}`;
 }
 
 function credentials(steamID64, streamKey) {
@@ -75,10 +88,25 @@ async function getData() {
         previous_current = current_time;
     }
 
-    if (document.getElementsByClassName('current')[0]) {
-        display_current();
-    }
+    display_current();
     display_last();
+
+    const trackerDiv = document.getElementById('tracker');
+    let trackerHeight = trackerDiv.getBoundingClientRect().height;
+    let trackerFont = parseInt(window.getComputedStyle(trackerDiv, null).getPropertyValue('font-size'));
+
+    while (trackerHeight < window.innerHeight - 90) {
+        trackerHeight = trackerDiv.getBoundingClientRect().height;
+        trackerFont = parseInt(window.getComputedStyle(trackerDiv, null).getPropertyValue('font-size'));
+        trackerDiv.style.fontSize = (trackerFont + 1) + 'px';
+    }
+
+    while (trackerHeight > window.innerHeight) {
+        trackerHeight = trackerDiv.getBoundingClientRect().height;
+        trackerFont = parseInt(window.getComputedStyle(trackerDiv, null).getPropertyValue('font-size'));
+        trackerDiv.style.fontSize = (trackerFont - 1) + 'px';
+    }
+
 
 }
 
@@ -235,6 +263,8 @@ if (last) {
 
     const lastCrownBImgElement = document.getElementById('crown-img');
     lastCrownBImgElement.setAttribute('src', `image/crown/${crownName}.png`);
+
+
 }
     } else {
         const lastTimeElement = document.getElementById("last-time");
@@ -243,22 +273,30 @@ if (last) {
         const lastWorldElement = document.getElementById("last-world");
         lastWorldElement.textContent = `World: `;
 
-if (last) {
-    const lastCharImgElement = document.getElementById('char-img');
-    lastCharImgElement.setAttribute('src', ``);
+        if (last) {
+            const lastCharImgElement = document.getElementById('char-img');
+            lastCharImgElement.setAttribute('src', ``);
 
-    const lastEnemyImgElement = document.getElementById('enemy-img');
-    lastEnemyImgElement.setAttribute('img', ``);
+            const lastEnemyImgElement = document.getElementById('enemy-img');
+            lastEnemyImgElement.setAttribute('src', ``);
 
-    const lastWepAImgElement = document.getElementById('wepA-img');
-    lastWepAImgElement.setAttribute('src', ``);
+            const lastWepAImgElement = document.getElementById('wepA-img');
+            lastWepAImgElement.setAttribute('src', ``);
 
-    const lastWepBImgElement = document.getElementById('wepB-img');
-    lastWepBImgElement.setAttribute('src', ``);
+            const lastWepBImgElement = document.getElementById('wepB-img');
+            lastWepBImgElement.setAttribute('src', ``);
 
-    const lastCrownBImgElement = document.getElementById('crown-img');
-    lastCrownBImgElement.setAttribute('src', ``);
-}
+            const lastCrownBImgElement = document.getElementById('crown-img');
+            lastCrownBImgElement.setAttribute('src', ``);
+
+            const mutationElement =  document.getElementById('mutations');
+            while (mutationElement.hasChildNodes()) {
+                mutationElement.removeChild(mutationElement.firstChild);
+            }
+            const mutationText = document.createElement('h1');
+            mutationText.textContent = "Mutations: ";
+            mutationElement.appendChild(mutationText);
+        }
     }
 
     const lastLoopElement = document.getElementById("last-loop");
@@ -279,14 +317,18 @@ if (last) {
     const lastEnemyElement = document.getElementById("enemy");
     lastEnemyElement.textContent = `${enemyName}`;
 
-    const lastCrownElement = document.getElementById("crown");
-    lastCrownElement.textContent = `${crownName}`;
+    if (last) {
+        const lastCrownElement = document.getElementById("crown");
+        lastCrownElement.textContent = `${crownName}`;
 
-    const lastWepAElement = document.getElementById("wepA");
-    lastWepAElement.textContent = `${wepAName}`;
+        const lastWepAElement = document.getElementById("wepA");
+        lastWepAElement.textContent = `${wepAName}`;
 
-    const lastWepBElement = document.getElementById("wepB");
-    lastWepBElement.textContent = `${wepBName}`;
+        if (wepBName !== weaponIDs[0]["Gun name"]) {
+            const lastWepBElement = document.getElementById("wepB");
+            lastWepBElement.textContent = `${wepBName}`;
+        }
+    }
 }
 
 function addMutation(index) {
@@ -299,6 +341,5 @@ function addMutation(index) {
     const childImg = document.createElement('img');
     childImg.setAttribute('src', `image/mutation/${text}.png`);
     childImg.classList.add('name');
-
     parent.appendChild(childImg);
 }
