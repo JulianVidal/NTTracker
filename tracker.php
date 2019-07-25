@@ -6,10 +6,10 @@
     <link rel="stylesheet" type="text/css" href="style.css" >
     <script src="index.js"> </script>
     <script>
-        window.onload = () => {
-          let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
-          bannerNode.parentNode.removeChild(bannerNode);
-        }
+        //window.onload = () => {
+        //  let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+        //  bannerNode.parentNode.removeChild(bannerNode);
+        //}
         last = false;
     </script>
 </head>
@@ -50,10 +50,11 @@
         </h1>
 
         <h1 id="last-enemy">Death:
-             <h1 id="enemy" class="name"></h1>
+            <h1 id="enemy" class="name"></h1>
         </h1>
 
     </div>
+
 </div>
 
 </body>

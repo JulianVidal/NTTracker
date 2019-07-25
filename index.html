@@ -11,29 +11,30 @@
             let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
             bannerNode.parentNode.removeChild(bannerNode);
        }
-
+        last = false;
     </script>
 
     <title>Nuclear Thrones Tracker</title>
 </head>
 <body>
 
-<div class="form">
+<form class="form" method="get" action="tracker.php">
     <br>
     <label for="steamID64" class = "input_label" > SteamID64  </label>
-    <input id="steamID64" name="steamID64" />
+    <input id="steamID64" name="steamID" />
     <br>
     <label for="streamKey" class = "input_label" > Stream Key </label>
     <input id="streamKey" name="streamKey"/>
     <br>
     <label style="font-size: 12px;">
-        <input type="checkbox" id="darkMode"/>
+        <input type="checkbox" name="darkMode" id="darkMode" value="false" />
         Light Mode
     </label>
+
     <br>
-    <button id="submit" onclick="redirect('tracker.php')"> Track </button>
-    <button id="submit-lastRun" onclick="redirect('tracker-lastRun.php')"> Track (Last Run)</button>
-</div>
+    <input type="submit" id="submit" value="Track">
+    <input type="submit" id="submit-lastRun" value="Track (Last Run)" formaction="tracker-lastRun.php">
+</form>
 
 </body>
 </html>

@@ -34,7 +34,7 @@ h1 {
     flex-wrap: wrap;
     flex-direction: column;
     height: auto;
-    margin-left: 5px;
+    padding-left: 5px;
 }
 
 .name {

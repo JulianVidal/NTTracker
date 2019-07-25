@@ -3,6 +3,7 @@ let key;
 
 let URL;
 let data;
+let oldData = ' ';
 
 let death = false;
 
@@ -11,7 +12,7 @@ let current_time = Math.round((new Date()).getTime() / 1000);
 
 let last = true;
 
-let darkMode = false;
+let darkMode = true;
 
 let best_loop;
 let best_world;
@@ -61,35 +62,47 @@ async function setup() {
     document.getElementById('tracker').width = window.innerWidth;
 }
 
-function redirect(file) {
-    if (document.getElementById('darkMode').checked) {
-        darkMode = false;
-    }
-    id = document.getElementById('steamID64').value;
-    key = document.getElementById('streamKey').value;
-
-    window.location  = `${file}?steamID64=${id}&streamKey=${key}&darkMode=${darkMode}`;
-}
-
 function credentials(steamID64, streamKey) {
     id = steamID64;
     key = streamKey;
     URL = `https://tb-api.xyz/stream/get?s=${id}&key=${key}`;
 
-    setInterval( getData, 1000);
+    if (id !== "" && streamKey !== "") {
+        setInterval( getData, 1000);
+    }
 }
 
 async function getData() {
     const response = await fetch(URL);
-    data = await response.json();
 
-    if (!data.current) {
-        death = true;
-        previous_current = current_time;
+    if (response.data !== 403) {
+        data = await response.json();
+
+        if (!data.current) {
+            death = true;
+            previous_current = current_time;
+        }
+
+        display_current();
+        display_last();
+
+
+        if (data.previous) {
+            if (data.previous !== oldData && last === true) {
+                updateBest();
+            }
+        }
+
+
+        oldData = data;
+
+    } else {
+        console.log('Data not found');
+        oldData = data;
+
     }
 
-    display_current();
-    display_last();
+
 
     const trackerDiv = document.getElementById('tracker');
     let trackerHeight = trackerDiv.getBoundingClientRect().height;
@@ -111,7 +124,6 @@ async function getData() {
 }
 
 function display_current() {
-
     let current_world = "";
     let current_worldLevel = "";
     let current_loop = "";
@@ -143,12 +155,12 @@ function display_current() {
         minutes = Math.floor(timeDifference / 60);
         seconds = timeDifference % 60;
 
-         current_world = data.current.world;
-         current_worldLevel = data.current.level;
-         current_loop = data.current.loops;
-         current_level = data.current.charlvl;
-         current_kills = data.current.kills;
-         current_type = data.current.type;
+        current_world = data.current.world;
+        current_worldLevel = data.current.level;
+        current_loop = data.current.loops;
+        current_level = data.current.charlvl;
+        current_kills = data.current.kills;
+        current_type = data.current.type;
 
         const currentTimeElement = document.getElementById("current-time");
         currentTimeElement.textContent = `Time: ${minutes} : ${seconds}`;
@@ -181,6 +193,13 @@ function display_current() {
 }
 
 function display_last() {
+    const bestRunElement = document.getElementById('best-run');
+
+    if (last && best_level !== undefined && last === true) {
+        bestRunElement.textContent = `Best Run:L${best_loop} ${best_world}:${best_level}`;
+    } else if (last === true) {
+        bestRunElement.textContent = `Best Run:`;
+    }
 
     let last_world = "";
     let last_worldLevel = "";
@@ -197,27 +216,27 @@ function display_last() {
     if (data.previous) {
 
         const start = data.previous.timestamp;
-    const timeDifference = previous_current - start;
-    const minutes = Math.floor(timeDifference / 60);
-    const seconds = timeDifference % 60;
+        const timeDifference = previous_current - start;
+        const minutes = Math.floor(timeDifference / 60);
+        const seconds = timeDifference % 60;
 
-     last_world = data.previous.world;
-     last_worldLevel = data.previous.level;
-     last_loop = data.previous.loops;
-     last_level = data.previous.charlvl;
-     last_kills = data.previous.kills;
-     last_type = data.previous.type;
+        last_world = data.previous.world;
+        last_worldLevel = data.previous.level;
+        last_loop = data.previous.loops;
+        last_level = data.previous.charlvl;
+        last_kills = data.previous.kills;
+        last_type = data.previous.type;
 
-    const enemyID = data.previous.lasthit;
-     enemyName = enemyIDs[enemyID]["Enemy name"];
-    const charID = data.previous.char;
-     charName = characterIDs[charID]["Character"];
-     const crownID = data.previous.crown;
-     crownName = crownIDs[crownID]["Crown"];
-     const wepAID = data.previous.wepA;
-     wepAName = weaponIDs[wepAID]["Gun name"];
-     const wepBID = data.previous.wepB;
-     wepBName = weaponIDs[wepBID]["Gun name"];
+        const enemyID = data.previous.lasthit;
+        enemyName = enemyIDs[enemyID]["Enemy name"];
+        const charID = data.previous.char;
+        charName = characterIDs[charID]["Character"];
+        const crownID = data.previous.crown;
+        crownName = crownIDs[crownID]["Crown"];
+        const wepAID = data.previous.wepA;
+        wepAName = weaponIDs[wepAID]["Gun name"];
+        const wepBID = data.previous.wepB;
+        wepBName = weaponIDs[wepBID]["Gun name"];
 
         const lastTimeElement = document.getElementById("last-time");
         lastTimeElement.textContent = `Time: ${minutes} : ${seconds}`;
@@ -225,47 +244,47 @@ function display_last() {
         const lastWorldElement = document.getElementById("last-world");
         lastWorldElement.textContent = `World: ${last_world} - ${last_worldLevel}`;
 
-if (last) {
-    const mutationElement =  document.getElementById('mutations');
-    while (mutationElement.hasChildNodes()) {
-        mutationElement.removeChild(mutationElement.firstChild);
-    }
+        if (last) {
+            const mutationElement =  document.getElementById('mutations');
+            while (mutationElement.hasChildNodes()) {
+                mutationElement.removeChild(mutationElement.firstChild);
+            }
 
-    const mutationText = document.createElement('h1');
-    mutationText.textContent = "Mutations: ";
-    mutationElement.appendChild(mutationText);
+            const mutationText = document.createElement('h1');
+            mutationText.textContent = "Mutations: ";
+            mutationElement.appendChild(mutationText);
 
-    const mutationArr = data.previous.mutations.split("");
-    for (i = 0; i < mutationArr.length; i++) {
-        if (mutationArr[i] == 1) {
-            addMutation(i);
+            const mutationArr = data.previous.mutations.split("");
+            for (i = 0; i < mutationArr.length; i++) {
+                if (mutationArr[i] == 1) {
+                    addMutation(i);
+                }
+            }
+            const lastCharImgElement = document.getElementById('char-img');
+            if (data.previous.skin === 0) {
+                lastCharImgElement.setAttribute('src', `image/character/${charName}.png`);
+            }  else {
+                lastCharImgElement.setAttribute('src', `image/character/${charName}B.png`);
+            }
+
+            const lastEnemyImgElement = document.getElementById('enemy-img');
+            lastEnemyImgElement.setAttribute('src', `image/enemy/${enemyName}.gif`);
+
+            if (wepAID !== 0) {
+                const lastWepAImgElement = document.getElementById('wepA-img');
+                lastWepAImgElement.setAttribute('src', `image/weapon/${wepAName}.png`);
+            }
+
+            if (wepBID !== 0) {
+                const lastWepBImgElement = document.getElementById('wepB-img');
+                lastWepBImgElement.setAttribute('src', `image/weapon/${wepBName}.png`);
+            }
+
+            const lastCrownBImgElement = document.getElementById('crown-img');
+            lastCrownBImgElement.setAttribute('src', `image/crown/${crownName}.png`);
+
         }
-    }
-    const lastCharImgElement = document.getElementById('char-img');
-    if (data.previous.skin === 0) {
-        lastCharImgElement.setAttribute('src', `image/character/${charName}.png`);
-    }  else {
-        lastCharImgElement.setAttribute('src', `image/character/${charName}B.png`);
-    }
 
-    const lastEnemyImgElement = document.getElementById('enemy-img');
-    lastEnemyImgElement.setAttribute('src', `image/enemy/${enemyName}.gif`);
-
-    if (wepAID !== 0) {
-        const lastWepAImgElement = document.getElementById('wepA-img');
-        lastWepAImgElement.setAttribute('src', `image/weapon/${wepAName}.png`);
-    }
-
-    if (wepBID !== 0) {
-        const lastWepBImgElement = document.getElementById('wepB-img');
-        lastWepBImgElement.setAttribute('src', `image/weapon/${wepBName}.png`);
-    }
-
-    const lastCrownBImgElement = document.getElementById('crown-img');
-    lastCrownBImgElement.setAttribute('src', `image/crown/${crownName}.png`);
-
-
-}
     } else {
         const lastTimeElement = document.getElementById("last-time");
         lastTimeElement.textContent = `Time: `;
@@ -328,6 +347,7 @@ if (last) {
             const lastWepBElement = document.getElementById("wepB");
             lastWepBElement.textContent = `${wepBName}`;
         }
+
     }
 }
 
@@ -342,4 +362,36 @@ function addMutation(index) {
     childImg.setAttribute('src', `image/mutation/${text}.png`);
     childImg.classList.add('name');
     parent.appendChild(childImg);
+}
+
+function updateBest() {
+    const last_world = data.previous.world;
+    const last_worldLevel = data.previous.level;
+    const last_loop = data.previous.loops;
+
+    if (last_loop > best_loop) {
+        best_loop = last_loop;
+        best_world = last_world;
+        best_level = last_worldLevel;
+        DBUpdate();
+
+    } else if (last_loop === best_loop) {
+
+        if (last_world > best_world && last_world !== 100) {
+            best_world = last_world;
+            best_level = last_worldLevel;
+            DBUpdate();
+
+        } else if (last_world === best_world) {
+            if (last_worldLevel > best_level) {
+                best_level = last_worldLevel;
+                DBUpdate();
+            }
+        }
+    }
+}
+
+function DBUpdate() {
+    let request = new XMLHttpRequest();
+    request.open('POST', "update.php?steamID=" + id + "&loop=" + best_loop + "&world=" + best_world + "&level=" + best_level, false);
 }
